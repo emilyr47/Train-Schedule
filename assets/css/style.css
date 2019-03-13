@@ -1,0 +1,17 @@
+body {
+    background: url(https://stmed.net/sites/default/files/train-station-wallpapers-28950-3480280.jpg);
+}
+
+#table {
+    background-color: aliceblue;
+    width: 70%;
+    margin-left: 200px; 
+    margin-top: 20px;
+}
+
+#form {
+    background-color: aliceblue;
+    width: 70%;
+    margin-left: 200px; 
+    margin-top: 20px;
+}
