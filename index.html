@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Train Schedule</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<div id="title"><h1>Train Schedule</h1></div>
+
+<div id="table">
+            <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">#1</th>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency (min)</th>
+                        <th scope="col">Expected Arrival Time</th>
+                        <th scope="col">Minutes Until Arrival</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td id="name">Polar Express</td>
+                        <td id="destination">North Pole</td>
+                        <td id="frequency"></td>
+                        <td id="arrival"></td>
+                        <td id="minutes"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td id="name2">Orient Express</td>
+                        <td id="destination2">Venice</td>
+                        <td id="frequency2"></td>
+                        <td id="arrival2"></td>
+                        <td id="minutes2"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td id="name3">Von Ryan's Express</td>
+                        <td id="destination3">Swiss Border</td>
+                        <td id="frequency3"></td>
+                        <td id="arrival3"></td>
+                        <td id="minutes3"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td id="name4">Silver Streak</td>
+                        <td id="destination4">Chicago</td>
+                        <td id="frequency4"></td>
+                        <td id="arrival4"></td>
+                        <td id="minutes4"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td id="name5">Gare Montparnasse</td>
+                        <td id="destination5">Paris</td>
+                        <td id="frequency5"></td>
+                        <td id="arrival5"></td>
+                        <td id="minutes5"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+</div><br>
+<div id="form">
+    <form>
+        <div id="form-title"><h4>Add Your Own Train</h4></div><br>
+        <div class="form-group">
+          <label for="nameInput">Train Name</label><br>
+          <input type="text" class="form-control" id="form-name" placeholder="Polar Express">
+        </div><br>
+        <div class="form-group">
+            <label for="destinationInput">Destination</label><br>
+            <input type="text" class="form-control" id="form-destination" placeholder="North Pole">
+        </div><br>
+        <div class="form-group">
+            <label for="timeInput">First Train Time</label><br>
+            <input type="text" class="form-control" id="form-time" placeholder="HH:mm military time">
+        </div><br>
+        <div class="form-group">
+            <label for="frequencyInput">Frequency</label><br>
+            <input type="text" class="form-control" id="form-frequency" placeholder="minutes">
+        </div><br>
+        </div>
+      </form>
+      <button id="submit">See Your Train's Schedule</button>
+</div>
+
+<body>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- Link to Moment.js should go here -->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <!--<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>-->
+
+  <!-- Script -->
+  <script>
+      function train(){
+        $("#frequency").html(frequency);
+        var time1Converted = moment(time1, "H:mm").subtract(1, "years"); // make sure it comes before current time
+        var currentTime = moment(); // retrieving current time
+        var diffTime = moment().diff(moment(time1Converted), "minutes"); // calculating the difference between the times to find the minutes until arrival
+        var tRemainder = diffTime % frequency; // finding the difference
+        var tMinutesTillTrain = frequency - tRemainder; //setting the minutes until arrival
+        $("#minutes").html(tMinutesTillTrain);
+        var nextTrain = moment().add(tMinutesTillTrain, "minutes"); // setting the arrival time
+        $("#arrival").html(moment(nextTrain).format("h:mm"));
+      }
+
+// Train #1:
+var frequency = 30; // how often the train arrives
+var time1 = "4:45"; // time of first arrival of the day is at 4:45am
+train();
+
+// Train #2:
+var frequency = 5; // how often the train arrives
+var time1 = "4:30"; // time of first arrival of the day is at 4:45am
+$("#frequency2").html(frequency);
+var time1Converted = moment(time1, "H:mm").subtract(1, "years"); // make sure it comes before current time
+var currentTime = moment(); // retrieving current time
+var diffTime = moment().diff(moment(time1Converted), "minutes"); // calculating the difference between the times to find the minutes until arrival
+var tRemainder = diffTime % frequency; // finding the difference
+var tMinutesTillTrain = frequency - tRemainder; //setting the minutes until arrival
+$("#minutes2").html(tMinutesTillTrain);
+var nextTrain = moment().add(tMinutesTillTrain, "minutes"); // setting the arrival time
+$("#arrival2").html(moment(nextTrain).format("h:mm"));
+
+// Train #3:
+var frequency = 20; // how often the train arrives
+var time1 = "4:40"; // time of first arrival of the day is at 4:45am
+$("#frequency3").html(frequency);
+var time1Converted = moment(time1, "H:mm").subtract(1, "years"); // make sure it comes before current time
+var currentTime = moment(); // retrieving current time
+var diffTime = moment().diff(moment(time1Converted), "minutes"); // calculating the difference between the times to find the minutes until arrival
+var tRemainder = diffTime % frequency; // finding the difference
+var tMinutesTillTrain = frequency - tRemainder; //setting the minutes until arrival
+$("#minutes3").html(tMinutesTillTrain);
+var nextTrain = moment().add(tMinutesTillTrain, "minutes"); // setting the arrival time
+$("#arrival3").html(moment(nextTrain).format("h:mm"));
+
+// Train #4:
+var frequency = 15; // how often the train arrives
+var time1 = "4:35"; // time of first arrival of the day is at 4:45am
+$("#frequency4").html(frequency);
+var time1Converted = moment(time1, "H:mm").subtract(1, "years"); // make sure it comes before current time
+var currentTime = moment(); // retrieving current time
+var diffTime = moment().diff(moment(time1Converted), "minutes"); // calculating the difference between the times to find the minutes until arrival
+var tRemainder = diffTime % frequency; // finding the difference
+var tMinutesTillTrain = frequency - tRemainder; //setting the minutes until arrival
+$("#minutes4").html(tMinutesTillTrain);
+var nextTrain = moment().add(tMinutesTillTrain, "minutes"); // setting the arrival time
+$("#arrival4").html(moment(nextTrain).format("h:mm"));
+
+// Train #5:
+var frequency = 10; // how often the train arrives
+var time1 = "4:25"; // time of first arrival of the day is at 4:45am
+$("#frequency5").html(frequency);
+var time1Converted = moment(time1, "H:mm").subtract(1, "years"); // make sure it comes before current time
+var currentTime = moment(); // retrieving current time
+var diffTime = moment().diff(moment(time1Converted), "minutes"); // calculating the difference between the times to find the minutes until arrival
+var tRemainder = diffTime % frequency; // finding the difference
+var tMinutesTillTrain = frequency - tRemainder; //setting the minutes until arrival
+$("#minutes5").html(tMinutesTillTrain);
+var nextTrain = moment().add(tMinutesTillTrain, "minutes"); // setting the arrival time
+$("#arrival5").html(moment(nextTrain).format("h:mm"));
+
+// Add Your Own Train:
+$("#submit").click(function(){
+  var name = $("#form-name").val();
+  var destination = $("#form-destination").val();
+  var arrival = $("#form-time").val();
+  var frequency = $("#form-frequency").val();
+});
+var frequency 
+</script>
+
+</body>
+
+</html>
