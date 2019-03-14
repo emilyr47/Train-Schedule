@@ -1,4 +1,22 @@
-// Need to set frequency and time1 in database
+var config = {
+  apiKey: "AIzaSyD5TFXIwyYGOCUhsE8cPN1mccVSnITu6iw",
+  authDomain: "train-schedule-cdcff.firebaseapp.com",
+  databaseURL: "https://train-schedule-cdcff.firebaseio.com",
+  projectId: "train-schedule-cdcff",
+  storageBucket: "train-schedule-cdcff.appspot.com",
+  messagingSenderId: "409342800997"
+};
+firebase.initializeApp(config);
+var dataRef = firebase.database();
+
+var name = $("#name").val();
+var destination = $("#destination").val();
+var frequency = $("#frequency").val();
+var arrival = $("#arrival").val();
+var minutes = $("#minutes").val();
+
+
+
   // Train #1:
   var frequency = 30; // how often the train arrives
   var time1 = "4:45"; // time of first arrival of the day is at 4:45am
@@ -7,7 +25,7 @@
   var currentTime = moment(); // retrieving current time
   var diffTime = moment().diff(moment(time1Converted), "minutes"); // calculating the difference between the times to find the minutes until arrival
   var tRemainder = diffTime % frequency; // finding the difference
-  var tMinutesTillTrain = frequency - tRemainder; //setting the minutes until arrival
+  var tMinutesTillTrain = frequency - tRemainder; // setting the minutes until arrival
   $("#minutes").html(tMinutesTillTrain);
   var nextTrain = moment().add(tMinutesTillTrain, "minutes"); // setting the arrival time
   $("#arrival").html(moment(nextTrain).format("h:mm"));
@@ -86,5 +104,18 @@
           .append($('<td>').html(frequency))  
           .append($('<td>').html(moment(nextTrain).format("h:mm")))
           .append($('<td>').html(tMinutesTillTrain))  
-      )    
+      ) 
+
+      dataRef.ref().push({
+    
+        name: name,
+        destination: destination,
+        frequency: frequency.toString(),
+        arrival: nextTrain.toString(),
+        minutes: tMinutesTillTrain.toString(),
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+      });//end push to firebase
+    
+
+      console.log(name);   
   }); 
