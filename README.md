@@ -5,3 +5,5 @@ This is a sample train schedule calculator.  It utilizes a Firebase database to 
 Techonologies Used:
 HTML, CSS, Bootstrap, JavaScript, Moment.js, and Firebase.
 
+View on GitHub Pages: https://emilyr47.github.io/Train-Schedule/
+
